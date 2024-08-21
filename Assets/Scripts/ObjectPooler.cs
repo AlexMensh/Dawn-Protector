@@ -27,7 +27,6 @@ public class ObjectPooler<T> where T : Bullet
                     item = checkItem;
                     break;
                 }
-
             }
         }
         

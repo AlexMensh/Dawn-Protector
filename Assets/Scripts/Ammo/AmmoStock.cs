@@ -29,29 +29,17 @@ public class AmmoStock : MonoBehaviour
     
     public void AddTracerBullet()
     {
-        _ammoStock.TryGetValue(_tracerBullet, out int value);
-        value++;
-        _ammoStock[_tracerBullet] = value;
-        
-        AmmoChanged?.Invoke(_tracerBullet, value);
+        AddBullet(_tracerBullet);
     }
     
     public void AddRocket()
     {
-        _ammoStock.TryGetValue(_rocket, out int value);
-        value++;
-        _ammoStock[_rocket] = value;
-        
-        AmmoChanged?.Invoke(_rocket, value);
+        AddBullet(_rocket);
     }
     
     public void AddMine()
     {
-        _ammoStock.TryGetValue(_mine, out int value);
-        value++;
-        _ammoStock[_mine] = value;
-        
-        AmmoChanged?.Invoke(_mine, value);
+        AddBullet(_mine);
     }
     
     public void RemoveBullet(Bullet bullet)  
@@ -69,5 +57,14 @@ public class AmmoStock : MonoBehaviour
     public bool CheckAmount(Bullet bullet)
     {
         return _ammoStock.TryGetValue(bullet, out int value) && value > 0;
+    }
+
+    private void AddBullet(Bullet bullet)
+    {
+        _ammoStock.TryGetValue(bullet, out int value);
+        value++;
+        _ammoStock[bullet] = value;
+        
+        AmmoChanged?.Invoke(bullet, value);
     }
 }
