@@ -1,9 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInput), typeof(BulletSpawner))]
 public class PlayerAttack : MonoBehaviour
 {
-    [SerializeField] private Bullet _prefab;
     [SerializeField] private BulletSpawnPoint _spawnPoint;
     [SerializeField] private Aim _aim;
 
@@ -28,8 +28,8 @@ public class PlayerAttack : MonoBehaviour
     private void Shoot()
     {
         Vector3 direction = _aim.transform.position - _spawnPoint.transform.position;
-        Bullet bullet = _spawner.SpawnObject(_spawnPoint.transform.position);
 
+        Bullet bullet = _spawner.SpawnObject(_spawnPoint.transform.position);
         Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
         bulletRigidbody.velocity = Vector3.zero;
         bulletRigidbody.AddForce(direction * _shotForce, ForceMode.Impulse);

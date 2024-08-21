@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPooler<T> where T : MonoBehaviour
+public class ObjectPooler<T> where T : Bullet
 {
     private Transform _container;
     private T _prefab;
@@ -22,11 +22,15 @@ public class ObjectPooler<T> where T : MonoBehaviour
         {
             if (checkItem.isActiveAndEnabled == false)
             {
-                item = checkItem;
-                break;
+                if (checkItem.GetType() == _prefab.GetType())
+                {
+                    item = checkItem;
+                    break;
+                }
+
             }
         }
-
+        
         if (item == null)
         {
             item = Object.Instantiate(_prefab);
@@ -40,6 +44,11 @@ public class ObjectPooler<T> where T : MonoBehaviour
     public void PutObject(T item)
     {
         item.gameObject.SetActive(false);
+    }
+
+    public void UpdatePrefab(T newPrefab)
+    {
+        _prefab = newPrefab;
     }
 
     public void Reset()
