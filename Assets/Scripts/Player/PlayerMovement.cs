@@ -1,14 +1,27 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private float _yRotationLimit;
+    
+    private PlayerInput _playerInput;
+    private const float _fullAngle = 360f;
+    private const float _fullAngleHalf = 180f;
 
-    private const float _fullAngle = 360;
-    private const float _fullAngleHalf = 180;
-
+    private void Start()
+    {
+        _playerInput = GetComponent<PlayerInput>();
+    }
+    
     private void Update()
+    {
+        if (_playerInput.IsActive)
+            PlayerRotation();
+    }
+
+    private void PlayerRotation()
     {
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;

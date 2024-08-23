@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class Enemies : MonoBehaviour
     
     private EnemiesMover _enemiesMover;
 
+    public event Action PlayerWon;
+        
     private void Awake()
     {
         if (_enemiesMover == null)
@@ -35,10 +38,8 @@ public class Enemies : MonoBehaviour
             }
         }
 
-        if (enemiesCount > 0)
-            Debug.Log(enemiesCount);
-        else
-            Debug.Log("Player Win");
+        if (enemiesCount <= 0)
+            PlayerWon?.Invoke();
     }
     
     private void RemoveEnemy(Enemy enemy)
