@@ -35,7 +35,7 @@ public class PlayerAttack : MonoBehaviour
         Bullet bullet = _spawner.SpawnObject(_spawnPoint.transform.position);
         
         Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
-        bulletRigidbody.velocity = Vector3.zero;
+        bulletRigidbody.linearVelocity = Vector3.zero;
         bulletRigidbody.AddForce(direction * _shotForce, ForceMode.Impulse);
 
         NotifyEnemies();
